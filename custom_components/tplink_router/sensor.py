@@ -272,7 +272,6 @@ LTE_SENSOR_TYPES = (
             name="LTE Total Statistics",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.TOTAL,
-            native_unit_of_measurement=UnitOfInformation.BYTES,
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -333,7 +332,7 @@ LTE_SENSOR_TYPES = (
             name="LTE RSRQ",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+            native_unit_of_measurement="dB",
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -343,7 +342,7 @@ LTE_SENSOR_TYPES = (
             name="LTE SNR",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+            native_unit_of_measurement="dB",
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -752,7 +751,22 @@ class TPLinkRouterSensor(CoordinatorEntity[TPLinkRouterCoordinator], SensorEntit
     def native_value(self):
         """Return the sensor value from current coordinator data."""
         coordinator_data = getattr(self.coordinator, self.sensor.sensor_type)
-        return self.sensor.value(coordinator_data)
+        value = self.sensor.value(coordinator_data)
+        if self.entity_description.key == "lte_total_statistics" and value is not None:
+            # Switch display units at 1 GiB, using binary conversions.
+            divisor = 1024**3 if value >= 1024**3 else 1024**2
+            return value / divisor
+        return value
+
+    @property
+    def native_unit_of_measurement(self):
+        """Use MiB below 1 GiB and GiB from 1 GiB upward."""
+        if self.entity_description.key == "lte_total_statistics":
+            value = self.sensor.value(self.coordinator.lte_status)
+            if value is not None and value >= 1024**3:
+                return UnitOfInformation.GIBIBYTES
+            return UnitOfInformation.MEBIBYTES
+        return self.entity_description.native_unit_of_measurement
 
     @property
     def available(self) -> bool:
