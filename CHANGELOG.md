@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.49.0] - 2026-11-26
+
+### Added
+
+- Polish (pl) UI translations for config flow, options, and services.
+- Added LTE info for Archer MR515 1.0.
+- Added support for new firmware for Archer MR600 v5.
+- Added Archer NX500 v2.0 to the support list.
+
+### Fixed
+
+- LTE RSRQ and SNR units are dB (not dBm); same for serving-cell RSRQ.
+- Build DeviceInfo without dict-style access for Home Assistant 2026.11.
+- Fixes for Mercusys MR60X v2.0, worker thread, Deco X50-5G periodic unavailable entities, and C6U / SG device merging.
+
 ## [2.48.0] - 2026-11-22
 
 ### Fixed
