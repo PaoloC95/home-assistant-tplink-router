@@ -323,7 +323,7 @@ LTE_SENSOR_TYPES = (
             name="LTE RSRP",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -343,7 +343,7 @@ LTE_SENSOR_TYPES = (
             name="LTE SNR",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement="dB",
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -504,7 +504,7 @@ SERVING_CELL_SENSOR_TYPES = (
             name="LTE Anchor RSRQ",
             icon="mdi:antenna",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         ),
     ),
     # LTE CA secondary cell (networkType 7, LTE+)
@@ -563,7 +563,7 @@ SERVING_CELL_SENSOR_TYPES = (
             name="LTE CA RSRQ",
             icon="mdi:antenna",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         ),
     ),
 )
