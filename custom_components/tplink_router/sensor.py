@@ -10,6 +10,7 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.const import (
     PERCENTAGE,
+    SIGNAL_STRENGTH_DECIBELS,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     EntityCategory,
     UnitOfDataRate,
@@ -322,7 +323,7 @@ LTE_SENSOR_TYPES = (
             name="LTE RSRP",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         ),
     ),
     TPLinkRouterLTESensorConfig(
@@ -332,7 +333,7 @@ LTE_SENSOR_TYPES = (
             name="LTE RSRQ",
             icon="mdi:sim-outline",
             state_class=SensorStateClass.MEASUREMENT,
-            native_unit_of_measurement="dB",
+            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         ),
     ),
     TPLinkRouterLTESensorConfig(
